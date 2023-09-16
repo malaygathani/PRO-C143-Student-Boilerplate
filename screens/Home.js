@@ -17,13 +17,29 @@ export default class HomeScreen extends Component {
     super(props);
     this.state={
       movieDetails: {},
-      ngrok_url:""
+      ngrok_url:"https://2ba1-2401-4900-54d7-a93-81d9-bd28-ce7b-7b10.ngrok.io"
     }
   }
 
   /*define getmovie(), likedMovie(), dislikedMovie() ,notWatched() functions here*/
+const url=this.state.ngrok_url+"/movies"
 
-
+  axios
+  .get(url)
+  .then((response)=>{
+    this.setState({movieDetails:response.data.data });
+  })
+getMovie=()=>{
+  const url=this.state.ngrok_url+"/movies"
+ axios
+  .get(url)
+  .then((response)=>{
+    this.setState({movieDetails:response.data.data });
+  })
+  .catch((error)=>{
+    console.log(error.message)
+  })
+}
   render() {
       return (
         <View style={styles.container}>
